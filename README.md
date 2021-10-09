@@ -3,7 +3,7 @@
 Created: October 9, 2021 3:41 PM
 
 # hand_gesture_recognition_by_DGNN
-This is an implementation of hand gesture recognition using DGNN model. DGNN is proposed by the paper "Skeleton-Based Action Recognition with Directed Graph Neural Networks" in CVPR 2019. The code is based on the unofficial Pytorch implementation of DGNN: [DGNN-PyTorch](https://github.com/kenziyuliu/DGNN-PyTorch)
+This is an implementation of hand gesture recognition using DGNN model. DGNN is proposed by the paper ["Skeleton-Based Action Recognition with Directed Graph Neural Networks"](http://openaccess.thecvf.com/content_CVPR_2019/papers/Shi_Skeleton-Based_Action_Recognition_With_Directed_Graph_Neural_Networks_CVPR_2019_paper.pdf) in CVPR 2019. The code is based on the unofficial Pytorch implementation of DGNN: [DGNN-PyTorch](https://github.com/kenziyuliu/DGNN-PyTorch)
 
 ## **Dependencies**
 
