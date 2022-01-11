@@ -1,7 +1,7 @@
 # @Author:Xie Ningwei
 # @Date:2021-10-09 15:38:48
 # @LastModifiedBy:Xie Ningwei
-# @Last Modified time:2021-10-09 15:39:44
+# @Last Modified time:2021-11-26 15:56:52
 import re
 import sys
 sys.path.append("../")
@@ -15,14 +15,14 @@ import argparse
 # 手部关键点个数
 joint_num = 22
 # 抽取帧数
-frame_num = 25
+frame_num = 20
 # 通道数（坐标个数）
 channel_num = 3
 # 姿态个数，1-6为fine姿态，7-14为coarse姿态
 class_num = 14
 # 训练：测试比 = 7 : 3
 sample_num = 2800
-train_sample_num = int(sample_num * 0.7)
+train_sample_num = int(sample_num * 0.8)
 test_sample_num = sample_num - train_sample_num
 
 
@@ -69,10 +69,14 @@ def generate_train_test_data(troncage_file):
 
 def read_sample(info):
     position_matrix = []
-    sample_path = "..\\DHG2016\\gesture_{}\\finger_{}\\subject_{}\\essai_{}".format(info[0], info[1], info[2], info[3])
+    sample_path = "D:\\Programming workspaces\\CMRI projects python\\hand_gesture_recognition\\DHG2016\\gesture_{}\\finger_{}\\subject_{}\\essai_{}".format(info[0], info[1], info[2], info[3])
     skeleton_file = os.path.join(sample_path, "skeleton_world.txt")
-    
-    label = info[0] - 1
+    if class_num == 28:
+        label = (info[0] - 1) * 2 + info[1] - 1
+        assert 0 <= label <= 27
+    else:
+        label = info[0] - 1
+        assert 0 <= label <= 13
     with open(skeleton_file, 'r') as f:
         lines = f.readlines()
 
@@ -107,7 +111,7 @@ def read_sample(info):
     return position_matrix, label
 
 
-# 下采样到20帧
+# 下采样到frame number帧
 def down_sample(position_matrix):
     line = position_matrix.shape[0]
     XperClip = line // frame_num
@@ -121,7 +125,7 @@ def down_sample(position_matrix):
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Joint Data Generation for Hand Gesture Recognition Based on DGNN')
-    parser.add_argument('--troncage_file', default='..\\DHG2016\\informations_troncage_sequences.txt', type=str)
+    parser.add_argument('--troncage_file', default='D:\\Programming workspaces\\CMRI projects python\\hand_gesture_recognition\\DHG2016\\informations_troncage_sequences.txt', type=str)
     args = parser.parse_args()
     return args
 

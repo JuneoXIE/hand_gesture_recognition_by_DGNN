@@ -27,6 +27,7 @@ This is an implementation of hand gesture recognition using DGNN model. DGNN is 
 ### **DHG-14/28 dataset**
 
 1. The DHG14/28 dataset can be downloaded from [here](http://www-rech.telecom-lille.fr/DHGdataset/)
+
 2. After downloading, unzip it and put the folder `DHG2016` to the base folder
    
     The structure of folder DHG2016 should be like:
@@ -72,7 +73,10 @@ This is an implementation of hand gesture recognition using DGNN model. DGNN is 
     ```
     
      After that, the traning and validating joint data files in npy format can be found in the `data` folder.
-    
+
+5. Run `generate_rotation_data.py` and `generate_rotation_motion_data.py` to produce rotation information to replace bone information in directed graphs.
+
+   
 
 ## Definition of directed graph for hand skeleton
 
@@ -116,6 +120,13 @@ To test some model weights (by default saved in ./checkpoints/), do:
 python3 main.py --mode 'validate' --resume "./checkpoints/model.pth"
 ```
 
+If to train and validate the two-stream model, run the function `train_TwoStreamDGNN` under `if __name__ == '__main__':`
+
+```python
+train_TwoStreamDGNN(args)
+```
+
 ## TODO
 
-- Add two-steam DGNN model
+- Add two-steam DGNN model √
+
